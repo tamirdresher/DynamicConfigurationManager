@@ -38,8 +38,8 @@ Global
 		SccProjectUniqueName1 = ConfigurationManager.csproj
 		SccLocalPath1 = .
 		SccProjectUniqueName2 = ..\\ConsoleApplication2\\ConsoleApplication2.csproj
-		SccProjectName2 = ../ConsoleApplication2
-		SccLocalPath2 = ..\\ConsoleApplication2
+		SccProjectName2 = ConsoleApplication2
+		SccLocalPath2 = ConsoleApplication2
 		SccProjectUniqueName3 = ConfigurationManager.Tests\\ConfigurationManager.Tests.csproj
 		SccProjectTopLevelParentUniqueName3 = ConfigurationManager.sln
 		SccProjectName3 = ConfigurationManager.Tests
