@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManager", "ConfigurationManager.csproj", "{8FB69443-57F3-4FAB-8305-61476B221825}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication2", "ConsoleApplication2\ConsoleApplication2.csproj", "{11975A0D-204C-4099-8895-BDEA45ECFC27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManager.Tests", "ConfigurationManager.Tests\ConfigurationManager.Tests.csproj", "{592EB18A-21C1-4BBA-8FCB-1F60E0CBE3DB}"
 EndProject
@@ -29,32 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{949997
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApplication", "ConsoleApplication2\SampleApplication.csproj", "{11975A0D-204C-4099-8895-BDEA45ECFC27}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://dresher.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ConfigurationManager.csproj
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = ..\\ConsoleApplication2\\ConsoleApplication2.csproj
-		SccProjectName2 = ConsoleApplication2
-		SccLocalPath2 = ConsoleApplication2
-		SccProjectUniqueName3 = ConfigurationManager.Tests\\ConfigurationManager.Tests.csproj
-		SccProjectTopLevelParentUniqueName3 = ConfigurationManager.sln
-		SccProjectName3 = ConfigurationManager.Tests
-		SccLocalPath3 = ConfigurationManager.Tests
-		SccProjectUniqueName4 = ConfigurationEditor\\ConfigurationEditor.csproj
-		SccProjectName4 = ConfigurationEditor
-		SccLocalPath4 = ConfigurationEditor
-		SccProjectUniqueName5 = SampleConfigLib\\SampleConfigLib.csproj
-		SccProjectName5 = SampleConfigLib
-		SccLocalPath5 = SampleConfigLib
-		SccProjectUniqueName6 = ConfigurationManager.IntergrationTests\\ConfigurationManager.IntergrationTests.csproj
-		SccProjectTopLevelParentUniqueName6 = ConfigurationManager.sln
-		SccProjectName6 = ConfigurationManager.IntergrationTests
-		SccLocalPath6 = ConfigurationManager.IntergrationTests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -64,10 +39,6 @@ Global
 		{8FB69443-57F3-4FAB-8305-61476B221825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FB69443-57F3-4FAB-8305-61476B221825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FB69443-57F3-4FAB-8305-61476B221825}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{592EB18A-21C1-4BBA-8FCB-1F60E0CBE3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{592EB18A-21C1-4BBA-8FCB-1F60E0CBE3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{592EB18A-21C1-4BBA-8FCB-1F60E0CBE3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,6 +55,10 @@ Global
 		{D0F36FD7-B3F8-4265-92FA-1071851D9DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0F36FD7-B3F8-4265-92FA-1071851D9DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0F36FD7-B3F8-4265-92FA-1071851D9DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11975A0D-204C-4099-8895-BDEA45ECFC27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
