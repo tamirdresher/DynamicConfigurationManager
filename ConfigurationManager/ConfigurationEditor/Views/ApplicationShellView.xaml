@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="ConfigurationEditor.Views.ApplicationShellView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:configurationManager="clr-namespace:ConfigurationManager;assembly=ConfigurationManager"
+             xmlns:templateSelectors="clr-namespace:ConfigurationEditor.TemplateSelectors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:triggers="clr-namespace:ConfigurationEditor.Triggers"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="1000">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+        <templateSelectors:ConfigElementTemplateSelector x:Key="ConfigElementTemplateSelector"></templateSelectors:ConfigElementTemplateSelector>
+        <DataTemplate x:Key="ErrorNodeDataTemplate">
+            <TextBlock Text="{Binding Name,ValidatesOnDataErrors=True}"
+                       Background="Yellow" />
+        </DataTemplate>
+        <DataTemplate x:Key="ConfigPropertyDataTemplate">
+            <TextBlock Text="{Binding Name,ValidatesOnDataErrors=True}"
+                       >
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsValid}" Value="False">
+                                <Setter Property="Background" Value="Red"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                </TextBlock>
+        </DataTemplate>
+        <HierarchicalDataTemplate x:Key="ConfigNodeDataTemplate"
+                                  ItemsSource="{Binding Children}">
+            <TextBlock Text="{Binding Name,ValidatesOnDataErrors=True}"
+                       Style="{StaticResource ConfigTreeTextBlockInError}" />
+        </HierarchicalDataTemplate>
+        <HierarchicalDataTemplate x:Key="ConfigGroupDataTemplate"
+                                  ItemTemplateSelector="{StaticResource ConfigElementTemplateSelector}"
+                                  ItemsSource="{Binding Children}">
+            <TextBlock Text="{Binding Name,ValidatesOnDataErrors=True}"
+                       Style="{StaticResource ConfigTreeTextBlockInError}" />
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top"
+              IsMainMenu="True">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open Configuration..."
+                          x:Name="OpenConfig"
+                          InputGestureText="Ctrl+O">
+                    <i:Interaction.Triggers>
+                        <triggers:InputBindingTrigger>
+                            <triggers:InputBindingTrigger.InputBinding>
+                                <KeyBinding Modifiers="Control" Key="O"/>
+                            </triggers:InputBindingTrigger.InputBinding>
+                            <cal:ActionMessage MethodName="OpenConfig"/>
+                        </triggers:InputBindingTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+                <MenuItem Header="_Save Configuation"
+                          x:Name="SaveConfig"
+                          IsEnabled="{Binding ConfigurationRoot.IsValid,TargetNullValue=False}" InputGestureText="Ctrl+S">
+                    <i:Interaction.Triggers>
+                        <triggers:InputBindingTrigger>
+                            <triggers:InputBindingTrigger.InputBinding>
+                                <KeyBinding Modifiers="Control" Key="S"/>
+                            </triggers:InputBindingTrigger.InputBinding>
+                            <cal:ActionMessage MethodName="SaveConfig"/>
+                        </triggers:InputBindingTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid>
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TreeView ItemsSource="{Binding ConfigurationRoot.Children}"
+                          ItemTemplateSelector="{StaticResource ConfigElementTemplateSelector}"
+                          cal:Message.Attach="[Event SelectedItemChanged] = [Action SelectedItemChanged($eventArgs)]">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsExpanded"
+                                    Value="True" />
+                            <!--<Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsValid,UpdateSourceTrigger=PropertyChanged}"
+                                         Value="False">
+                                <Setter Property="Border.Background"
+                                        Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>-->
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+
+                </TreeView>
+                <ContentControl Grid.Column="1"
+                                cal:View.Model="{Binding ActiveItem}"></ContentControl>
+                
+                
+            </Grid>
+            <Grid Visibility="{Binding IsBusy,Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.3" Background="Gray">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ProgressBar   IsIndeterminate="True" Height="20" Width="350"></ProgressBar>
+                    <TextBlock HorizontalAlignment="Center">Working...</TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DockPanel>
+
+</UserControl>
