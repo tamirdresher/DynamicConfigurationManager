@@ -1,6 +1,8 @@
 Welcome to DynamicConfigurationManager!	{#welcome}
 =====================
 
+[![Build status](https://ci.appveyor.com/api/projects/status/327ypy8w0vtdqhwe)](https://ci.appveyor.com/project/tamirdresher/dynamicconfigurationmanager)
+
 ##Why another Configuration Manager for .NET?
 
 ###Code First
