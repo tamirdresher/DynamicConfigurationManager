@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConfigurationManager;
+using DynamicConfigurationManager;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using SampleConfigLib;
@@ -52,7 +52,7 @@ namespace ConsoleApplication2
             //Console.WriteLine(output);
             //Console.WriteLine("Trace:"+memoryTraceWriter.ToString());
 
-            var cm = new global::ConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeConfiguration(), new ArolModuleConfigDemo() });
+            var cm = new global::DynamicConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeConfiguration(), new ArolModuleConfigDemo() });
             cm.OpenConfiguration(klaconfigJson);
             {
                 var resolution = cm.AsDynamic().Level1.Level2.Level3.SomeConfiguration.Resolution;

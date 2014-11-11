@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager.Json
 {
     public class IgnorableSerializerContractResolver : DefaultContractResolver
     {

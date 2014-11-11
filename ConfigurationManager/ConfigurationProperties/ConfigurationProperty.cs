@@ -1,9 +1,10 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using DynamicConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
-namespace ConfigurationManager.ConfigurationProperties
+namespace DynamicConfigurationManager.ConfigurationProperties
 {
     public abstract class ConfigurationProperty<T> : INotifyPropertyChanged,IConfigurationProperty<T>
     {

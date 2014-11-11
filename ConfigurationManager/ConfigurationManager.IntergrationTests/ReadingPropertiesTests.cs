@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicConfigurationManager;
 using NUnit.Framework;
 
 namespace ConfigurationManager.IntergrationTests
@@ -14,7 +15,7 @@ namespace ConfigurationManager.IntergrationTests
         [Test]
         public void ReadWithConfigManagerAsDynamic()
         {
-            var cm = new ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
+            var cm = new DynamicConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
             cm.OpenConfiguration(new Version(1, 0), "");
 
             var resolution = cm.AsDynamic().Level1.Level2.Level3.SomeTestNodeDummy.Resolution;
@@ -31,7 +32,7 @@ namespace ConfigurationManager.IntergrationTests
         [Test]
         public void ConfigManager_GetConfigNode_UsingIndexer()
         {
-            var cm = new ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
+            var cm = new DynamicConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
             cm.OpenConfiguration(new Version(1, 0), "");
 
             var dynSomeConfig = cm.GetConfigNode<SomeTestNodeDummy>();
@@ -47,7 +48,7 @@ namespace ConfigurationManager.IntergrationTests
         [Test]
         public void ConfigManager_GetConfigNode_UsingConfigNodeAsDynamic()
         {
-            var cm = new ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
+            var cm = new DynamicConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
             cm.OpenConfiguration(new Version(1, 0), "");
 
             dynamic dynSomeConfig = cm.GetConfigNode<SomeTestNodeDummy>();
@@ -68,7 +69,7 @@ namespace ConfigurationManager.IntergrationTests
         [Test]
         public void ConfigManager_GetConfigNode_UsingRegularProperty()
         {
-            var cm = new ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
+            var cm = new DynamicConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
             cm.OpenConfiguration(new Version(1, 0), "");
 
             SomeTestNodeDummy dynSomeConfig = cm.GetConfigNode<SomeTestNodeDummy>();
@@ -81,7 +82,7 @@ namespace ConfigurationManager.IntergrationTests
         [Test]
         public void ConfigManager_UsingAsDynamic_NonExistingPath_ThrowsKeyNotFoundException()
         {
-            var cm = new ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
+            var cm = new DynamicConfigurationManager.ConfigurationManager(new List<ConfigurationNode> { new SomeTestNodeDummy() });
             cm.OpenConfiguration(new Version(1, 0), "");
 
             Assert.Throws<KeyNotFoundException>(() =>

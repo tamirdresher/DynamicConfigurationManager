@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManager", "ConfigurationManager.csproj", "{8FB69443-57F3-4FAB-8305-61476B221825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfigurationManager", "DynamicConfigurationManager.csproj", "{8FB69443-57F3-4FAB-8305-61476B221825}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManager.Tests", "ConfigurationManager.Tests\ConfigurationManager.Tests.csproj", "{592EB18A-21C1-4BBA-8FCB-1F60E0CBE3DB}"
 EndProject

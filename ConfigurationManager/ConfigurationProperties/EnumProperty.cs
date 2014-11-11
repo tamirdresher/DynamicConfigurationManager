@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConfigurationManager.ConfigurationProperties
+namespace DynamicConfigurationManager.ConfigurationProperties
 {
     public class EnumProperty<TEnum> : ListProperty<TEnum>
         where TEnum : struct, IComparable, IConvertible, IFormattable

@@ -1,11 +1,12 @@
 using System.Dynamic;
+using System.Linq;
 using System.Text;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
-    class PathDescriber : DynamicObject
+    public class PathDescriber : DynamicObject
     {
-        private StringBuilder _strBuilder;
+        private readonly StringBuilder _strBuilder = new StringBuilder();
 
         public PathDescriber()
         {
@@ -14,19 +15,27 @@ namespace ConfigurationManager
         public string Path { get { return _strBuilder.ToString(); } }
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
+            result = this;
+            return AppendToPath(binder.Name);
+        }
 
-            if (_strBuilder == null)
-            {
-                _strBuilder = new StringBuilder();
+        public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
+        {
+            result = this;
+            return AppendToPath(indexes.First().ToString());
+        }
 
-            }
-            else
+        private bool AppendToPath(string name)
+        {
+            if (_strBuilder.Length != 0)
             {
                 _strBuilder.Append(".");
             }
-            _strBuilder.Append(binder.Name);
-            result = this;
+            _strBuilder.Append(name);
+
             return true;
         }
     }
+
+
 }

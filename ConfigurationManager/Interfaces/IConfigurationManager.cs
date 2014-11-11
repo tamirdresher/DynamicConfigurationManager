@@ -1,6 +1,6 @@
 using System;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager.Interfaces
 {
     public interface IConfigurationManager
     {

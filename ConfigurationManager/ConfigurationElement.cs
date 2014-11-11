@@ -1,12 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using System.ComponentModel;
+using DynamicConfigurationManager.Interfaces;
 using Newtonsoft.Json.Linq;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     public class ConfigurationElementImpl<T> : IConfigurationElement
     {

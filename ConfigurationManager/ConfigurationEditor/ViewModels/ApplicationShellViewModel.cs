@@ -10,11 +10,12 @@ using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
 using ConfigurationEditor.ViewModels.Properties;
-using ConfigurationManager;
-using ConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager;
+using DynamicConfigurationManager.Interfaces;
 using Microsoft.Win32;
 using Ninject;
 using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Conventions.Syntax;
 
 namespace ConfigurationEditor.ViewModels
 {
@@ -49,7 +50,7 @@ namespace ConfigurationEditor.ViewModels
 
         public async void SaveConfig()
         {
-            if (!string.IsNullOrEmpty(_configFilePath) && 
+            if (!string.IsNullOrEmpty(_configFilePath) &&
                 ConfigurationRoot != null &&
                 ConfigurationRoot.IsValid)
             {
@@ -81,6 +82,7 @@ namespace ConfigurationEditor.ViewModels
                                 .InheritedFrom<ConfigurationNode>()
                                 .BindAllInterfaces()));
 
+                    var qll = standardKernel.GetAll<ConfigurationNode>();
                     var configurationNodes = standardKernel.GetAll<IConfigurationNode>();
                     if (!configurationNodes.Any())
                     {
@@ -91,7 +93,7 @@ namespace ConfigurationEditor.ViewModels
                     }
                     await Task.Run(() =>
                     {
-                        _configurationManager = standardKernel.Get<ConfigurationManager.ConfigurationManager>();
+                        _configurationManager = standardKernel.Get<ConfigurationManager>();
 
                         _configFilePath = Path.Combine(directoryName, _configurationManager.DefaultConfigurationFileName);
 
@@ -145,20 +147,24 @@ namespace ConfigurationEditor.ViewModels
                     else
                     {
                         nodeVm = new ConfigurationNodeViewModel(node);
-                        foreach (var propVm in nodeVm.Children)
+                        foreach (var propVm in nodeVm.Children.OfType<ConfigurationPropertyViewModel>())
                         {
                             AddPropVm(propVm.ConfigProp, propVm);
                         }
 
                     }
                     parent.AddChild(nodeVm);
+                    CreateVms(nodeVm, node.ConfigurationElements);
                 }
-                var grp = configurationElement as ConfigurationGroup;
-                if (grp != null)
+                else
                 {
-                    var configurationGroupViewModel = new ConfigurationGroupViewModel(grp);
-                    parent.AddChild(configurationGroupViewModel);
-                    CreateVms(configurationGroupViewModel, grp.ConfigurationElements);
+                    var grp = configurationElement as ConfigurationGroup;
+                    if (grp != null)
+                    {
+                        var configurationGroupViewModel = new ConfigurationGroupViewModel(grp);
+                        parent.AddChild(configurationGroupViewModel);
+                        CreateVms(configurationGroupViewModel, grp.ConfigurationElements);
+                    }
                 }
 
             }

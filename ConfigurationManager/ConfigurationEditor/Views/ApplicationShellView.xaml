@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cal="http://www.caliburnproject.org"
-             xmlns:configurationManager="clr-namespace:ConfigurationManager;assembly=ConfigurationManager"
+             xmlns:configurationManager="clr-namespace:DynamicConfigurationManager;assembly=DynamicConfigurationManager"
              xmlns:templateSelectors="clr-namespace:ConfigurationEditor.TemplateSelectors"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggers="clr-namespace:ConfigurationEditor.Triggers"

@@ -4,19 +4,19 @@ using System.ComponentModel;
 using System.Linq;
 using Caliburn.Micro;
 using ConfigurationEditor.ViewModels.Properties;
-using ConfigurationManager;
-using ConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels
 {
-    public class ConfigurationNodeViewModel:ConfigurationElementViewModel
+    public class ConfigurationNodeViewModel:ConfigurationGroupViewModel//ConfigurationElementViewModel
     {
         public IConfigurationNode Node { get; set; }
 
-        public ConfigurationNodeViewModel(IConfigurationNode node)
+        public ConfigurationNodeViewModel(IConfigurationNode node):base(node)
         {
             Node = node;
-            Children=new BindableCollection<ConfigurationPropertyViewModel>();
+            //Children=new BindableCollection<ConfigurationPropertyViewModel>();
             CreatePropertyVm(node);
         }
         bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
@@ -64,7 +64,6 @@ namespace ConfigurationEditor.ViewModels
             child.PropertyChanged += (o, args) => { NotifyOfPropertyChange(args.PropertyName); };
             child.ErrorsChanged += (o, args) => { RaiseErrorsChanged( new DataErrorsChangedEventArgs("Name")); };
         }
-        public BindableCollection<ConfigurationPropertyViewModel> Children { get; set; }
         public override string Name
         {
             get { return Node.Name; }

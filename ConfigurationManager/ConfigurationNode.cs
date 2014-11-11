@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using DynamicConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class ConfigurationNode : DynamicObject, IConfigurationNode
+    public abstract class ConfigurationNode : ConfigurationGroup, IConfigurationNode
     {
         private Version _version;
         private List<IConfigurationProperty> _properties;
@@ -18,8 +19,8 @@ namespace ConfigurationManager
         }
         public abstract IEnumerable<IConfigurationProperty> CreateProperties();
         public abstract object DescribePath(dynamic pathDescriber);
-        [JsonProperty]
-        public virtual string Name { get; set; }
+        //[JsonProperty]
+        //public virtual string Name { get; set; }
         [JsonProperty]
         public Version Version
         {
@@ -49,23 +50,29 @@ namespace ConfigurationManager
         }
 
         [JsonIgnore]
-        public object this[string propName]
+        public virtual dynamic this[string configElementName]
         {
             get
             {
-                var prop = Properties.SingleOrDefault(p => p.Name == propName);
-                if (prop == null)
+                var prop = Properties.SingleOrDefault(p => p.Name == configElementName);
+                if (prop != null)
                 {
-                    throw new ArgumentException(string.Format("property with the name:'{0}' doesnt exist", propName));
+                    return prop.GetValue();
                 }
-                return prop.GetValue();
+
+                var configElement = base[configElementName];
+                if (configElement == null)
+                {
+                    throw new ArgumentException(string.Format("property or branch with the name:'{0}' doesnt exist under {1}", configElementName, Name));
+                }
+                return configElement;
             }
             set
             {
-                var prop = Properties.SingleOrDefault(p => p.Name == propName);
+                var prop = Properties.SingleOrDefault(p => p.Name == configElementName);
                 if (prop == null)
                 {
-                    throw new ArgumentException(string.Format("property with the name:'{0}' doesnt exist", propName));
+                    throw new ArgumentException(string.Format("property with the name:'{0}' doesnt exist", configElementName));
                 }
                 prop.SetValue(value);
             }
@@ -115,9 +122,9 @@ namespace ConfigurationManager
         {
             var pathDescriber = new PathDescriber();
             DescribePath(pathDescriber);
-            var pathParts = pathDescriber.Path.Split('.');
+            var pathParts = pathDescriber.Path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             IList<IConfigurationElement> elements = configurationManager.AppConfiguration.ConfigurationElements;
-            foreach (var pathPart in pathParts.Take(pathParts.Length - 1))
+            foreach (var pathPart in pathParts)
             {
                 var configGroup = elements.FirstOrDefault(e => e.Name == pathPart) as ConfigurationGroup;
                 if (configGroup != null)
@@ -131,13 +138,20 @@ namespace ConfigurationManager
                     elements = configGroup.ConfigurationElements;
                 }
             }
-            var configNode = elements.FirstOrDefault(e => e.Name == pathParts.Last()) as ConfigurationNode;
-            if (configNode == null)
+            var configurationGroup = elements.FirstOrDefault(e => e.Name == this.Name) as ConfigurationGroup;
+            if (configurationGroup == null)
             {
-                configNode = this;
+                configurationGroup = this;
                 elements.Add(this);
             }
-            return configNode;
+            else if (!(configurationGroup is ConfigurationNode))//could be that some other config node was scanned first, so a config group was created instead of our config node
+            {
+                this.ConfigurationElements.AddRange(configurationGroup.ConfigurationElements);
+                elements.Remove(configurationGroup);
+                elements.Add(this);
+                configurationGroup = this;
+            }
+            return configurationGroup as ConfigurationNode;
         }
 
         public override bool TryInvoke(InvokeBinder binder, object[] args, out object result)
@@ -152,20 +166,14 @@ namespace ConfigurationManager
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            if (!base.TryGetMember(binder, out result))
+            if (this.Properties.Any(p => p.Name == binder.Name))
             {
-                if (this.Properties.Any(p=>p.Name==binder.Name))
-                {
-                    result = this[binder.Name];
-                }
-                else
-                {
-                    return false;
-                    
-                }
+                result = this[binder.Name];
+                return true;
             }
-            return true;
+            return base.TryGetMember(binder, out result);
+
         }
-        
+
     }
 }

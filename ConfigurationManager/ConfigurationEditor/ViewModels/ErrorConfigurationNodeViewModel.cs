@@ -1,4 +1,4 @@
-using ConfigurationManager;
+using DynamicConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels
 {

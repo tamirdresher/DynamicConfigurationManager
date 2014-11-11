@@ -1,5 +1,5 @@
 using Caliburn.Micro;
-using ConfigurationManager;
+using DynamicConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels.Properties
 {

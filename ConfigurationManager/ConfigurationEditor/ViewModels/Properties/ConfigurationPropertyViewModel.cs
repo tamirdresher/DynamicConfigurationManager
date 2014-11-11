@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using ConfigurationEditor.Validation;
-using ConfigurationManager;
+using DynamicConfigurationManager.Interfaces;
 using FluentValidation;
 using FluentValidation.Results;
 

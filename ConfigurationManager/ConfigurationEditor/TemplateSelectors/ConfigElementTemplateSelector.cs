@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using ConfigurationEditor.ViewModels;
 using ConfigurationEditor.ViewModels.Properties;
-using ConfigurationManager;
 
 namespace ConfigurationEditor.TemplateSelectors
 {

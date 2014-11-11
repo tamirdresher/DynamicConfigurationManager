@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager.Json
 {
     public class IgnoreClassesConverter : Newtonsoft.Json.Converters.CustomCreationConverter<object>
     {

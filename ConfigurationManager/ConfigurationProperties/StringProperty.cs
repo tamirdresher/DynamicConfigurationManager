@@ -1,4 +1,4 @@
-﻿namespace ConfigurationManager.ConfigurationProperties
+﻿namespace DynamicConfigurationManager.ConfigurationProperties
 {
     public class StringProperty:ConfigurationProperty<string>
     {

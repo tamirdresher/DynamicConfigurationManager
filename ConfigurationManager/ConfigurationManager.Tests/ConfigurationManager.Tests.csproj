@@ -56,10 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationGroup_ReadingTests.cs" />
+    <Compile Include="ConfigurationManager_ReadingTests.cs" />
     <Compile Include="ConfigurationNodeTestHelper.cs" />
     <Compile Include="ConfigurationNodeTests.cs" />
     <Compile Include="ConfigurationProperties\ConfigurationPropertyTests.cs" />
     <Compile Include="ConfigurationManagerTests.cs" />
+    <Compile Include="PathDescriberTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConfigurationManager.csproj">
+    <ProjectReference Include="..\DynamicConfigurationManager.csproj">
       <Project>{8fb69443-57f3-4fab-8305-61476b221825}</Project>
-      <Name>ConfigurationManager</Name>
+      <Name>DynamicConfigurationManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

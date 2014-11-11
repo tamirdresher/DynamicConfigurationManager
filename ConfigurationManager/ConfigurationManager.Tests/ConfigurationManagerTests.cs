@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicConfigurationManager;
 using FakeItEasy;
 using NUnit.Framework;
 
@@ -15,14 +16,14 @@ namespace ConfigurationManager.Tests
         public void OpenConfiguration_TwoLevelConfigGroupsInJson_ConfigContainsTwoLevelGroupsInConfigObject()
         {
             string jsonConfig = @"{
-                                    ""$type"": ""ConfigurationManager.AppConfiguration, ConfigurationManager"",
+                                    ""$type"": ""DynamicConfigurationManager.AppConfiguration, DynamicConfigurationManager"",
                                     ""ConfigurationElements"": [
                                       {
-                                        ""$type"": ""ConfigurationManager.ConfigurationGroup, ConfigurationManager"",
+                                        ""$type"": ""DynamicConfigurationManager.ConfigurationGroup, DynamicConfigurationManager"",
                                         ""Name"": ""Level1"",
                                         ""ConfigurationElements"": [
                                           {
-                                            ""$type"": ""ConfigurationManager.ConfigurationGroup, ConfigurationManager"",
+                                            ""$type"": ""DynamicConfigurationManager.ConfigurationGroup, DynamicConfigurationManager"",
                                             ""Name"": ""Level2"",         
                                           }
                                         ]
@@ -34,7 +35,7 @@ namespace ConfigurationManager.Tests
                                     }
                                   }";
 
-            var configurationManager = new ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
+            var configurationManager = new DynamicConfigurationManager.ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
             configurationManager.OpenConfiguration(new Version(1, 0), jsonConfig);
 
             Assert.AreEqual("Level1",configurationManager.AppConfiguration.ConfigurationElements[0].Name);
@@ -46,14 +47,14 @@ namespace ConfigurationManager.Tests
         public void OpenConfiguration_ConfigVersionChanged_ConfigVersionUpdated()
         {
             string jsonConfig = @"{
-                                    ""$type"": ""ConfigurationManager.AppConfiguration, ConfigurationManager"",
+                                    ""$type"": ""DynamicConfigurationManager.AppConfiguration, DynamicConfigurationManager"",
                                     ""ConfigurationElements"": [
                                       {
-                                        ""$type"": ""ConfigurationManager.ConfigurationGroup, ConfigurationManager"",
+                                        ""$type"": ""DynamicConfigurationManager.ConfigurationGroup, DynamicConfigurationManager"",
                                         ""Name"": ""Level1"",
                                         ""ConfigurationElements"": [
                                           {
-                                            ""$type"": ""ConfigurationManager.ConfigurationGroup, ConfigurationManager"",
+                                            ""$type"": ""DynamicConfigurationManager.ConfigurationGroup, DynamicConfigurationManager"",
                                             ""Name"": ""Level2"",         
                                           }
                                         ]
@@ -65,7 +66,7 @@ namespace ConfigurationManager.Tests
                                     }
                                   }";
 
-            var klaConfigurationManager = new ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
+            var klaConfigurationManager = new DynamicConfigurationManager.ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
             var newVersion = new Version(2, 0);
             var configUpdated = klaConfigurationManager.OpenConfiguration(newVersion, jsonConfig);
 
@@ -77,14 +78,14 @@ namespace ConfigurationManager.Tests
         public void OpenConfiguration_ConfigHasTwoLevelOfGroupsVersionIsTheSame_ConfigIsChanged()
         {
             string jsonConfig = @"{
-                                    ""$type"": ""ConfigurationManager.AppConfiguration, ConfigurationManager"",
+                                    ""$type"": ""DynamicConfigurationManager.AppConfiguration, DynamicConfigurationManager"",
                                     ""ConfigurationElements"": [
                                       {
-                                        ""$type"": ""ConfigurationManager.ConfigurationGroup, ConfigurationManager"",
+                                        ""$type"": ""DynamicConfigurationManager.ConfigurationGroup, DynamicConfigurationManager"",
                                         ""Name"": ""Level1"",
                                         ""ConfigurationElements"": [
                                           {
-                                            ""$type"": ""ConfigurationManager.ConfigurationGroup, ConfigurationManager"",
+                                            ""$type"": ""DynamicConfigurationManager.ConfigurationGroup, DynamicConfigurationManager"",
                                             ""Name"": ""Level2"",         
                                           }
                                         ]
@@ -96,7 +97,7 @@ namespace ConfigurationManager.Tests
                                     }
                                   }";
 
-            var configurationManager = new ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
+            var configurationManager = new DynamicConfigurationManager.ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
             var newVersion = new Version(1, 0,0,0);
             var configUpdated = configurationManager.OpenConfiguration(newVersion, jsonConfig);
 
@@ -111,7 +112,7 @@ namespace ConfigurationManager.Tests
         {
             string jsonConfig = @"";
 
-            var configurationManager = new ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
+            var configurationManager = new DynamicConfigurationManager.ConfigurationManager(Enumerable.Empty<ConfigurationNode>());
             var newVersion = new Version(2, 0);
             var configUpdated = configurationManager.OpenConfiguration(newVersion, jsonConfig);
 

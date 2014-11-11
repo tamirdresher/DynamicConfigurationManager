@@ -1,4 +1,4 @@
-namespace configurationManagerManager
+namespace DynamicConfigurationManager
 {
     internal enum ElementExistResult
     {

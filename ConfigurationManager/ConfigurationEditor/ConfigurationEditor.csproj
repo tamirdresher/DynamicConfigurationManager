@@ -165,9 +165,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConfigurationManager.csproj">
+    <ProjectReference Include="..\DynamicConfigurationManager.csproj">
       <Project>{8fb69443-57f3-4fab-8305-61476b221825}</Project>
-      <Name>ConfigurationManager</Name>
+      <Name>DynamicConfigurationManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
