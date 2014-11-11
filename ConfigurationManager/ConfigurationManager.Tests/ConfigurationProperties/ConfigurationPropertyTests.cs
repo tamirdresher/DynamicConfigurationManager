@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.ConfigurationProperties;
 using FakeItEasy;
 using NUnit.Framework;
 

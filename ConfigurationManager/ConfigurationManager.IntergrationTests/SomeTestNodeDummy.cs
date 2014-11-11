@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using ConfigurationManager.ConfigurationProperties;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager;
+using DynamicConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.Interfaces;
 
 namespace ConfigurationManager.IntergrationTests
 {

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DynamicConfigurationManager;
+using NUnit.Framework;
 
 namespace ConfigurationManager.Tests
 {

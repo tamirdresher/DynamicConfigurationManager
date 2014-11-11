@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ConfigurationManager.Interfaces
+namespace DynamicConfigurationManager.Interfaces
 {
     public interface IConfigurationNode: IConfigurationGroup
     {

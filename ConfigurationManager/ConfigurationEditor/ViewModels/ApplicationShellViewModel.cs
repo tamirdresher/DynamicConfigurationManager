@@ -10,9 +10,8 @@ using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
 using ConfigurationEditor.ViewModels.Properties;
-using ConfigurationManager;
-using ConfigurationManager.ConfigurationProperties;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager;
+using DynamicConfigurationManager.Interfaces;
 using Microsoft.Win32;
 using Ninject;
 using Ninject.Extensions.Conventions;
@@ -94,7 +93,7 @@ namespace ConfigurationEditor.ViewModels
                     }
                     await Task.Run(() =>
                     {
-                        _configurationManager = standardKernel.Get<ConfigurationManager.ConfigurationManager>();
+                        _configurationManager = standardKernel.Get<ConfigurationManager>();
 
                         _configFilePath = Path.Combine(directoryName, _configurationManager.DefaultConfigurationFileName);
 

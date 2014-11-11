@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using Caliburn.Micro;
-using ConfigurationManager;
-using ConfigurationManager.ConfigurationProperties;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.Interfaces;
 using FluentValidation;
 
 namespace ConfigurationEditor.ViewModels.Properties

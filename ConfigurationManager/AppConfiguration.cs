@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager.Interfaces;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     public class AppConfiguration
     {

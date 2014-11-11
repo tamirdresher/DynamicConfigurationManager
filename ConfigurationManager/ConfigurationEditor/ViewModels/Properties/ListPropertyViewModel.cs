@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ConfigurationManager;
-using ConfigurationManager.ConfigurationProperties;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels.Properties
 {

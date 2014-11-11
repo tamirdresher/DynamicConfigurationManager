@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConfigurationManager.ConfigurationProperties;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager;
+using DynamicConfigurationManager.Interfaces;
 using FakeItEasy;
 using FakeItEasy.Core;
 using NUnit.Framework;

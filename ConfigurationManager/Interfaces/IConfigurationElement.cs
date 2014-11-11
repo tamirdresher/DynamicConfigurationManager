@@ -1,4 +1,4 @@
-namespace ConfigurationManager.Interfaces
+namespace DynamicConfigurationManager.Interfaces
 {
     public interface IConfigurationElement
     {

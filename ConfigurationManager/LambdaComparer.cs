@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
    
     /// <summary>

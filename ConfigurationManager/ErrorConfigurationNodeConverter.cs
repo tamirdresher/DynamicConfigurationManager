@@ -1,9 +1,7 @@
 using System;
-using System.Runtime.Remoting.Messaging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     public class ErrorConfigurationNodeConverter : JsonConverter
     {

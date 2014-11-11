@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using DynamicConfigurationManager;
+using FakeItEasy;
 
 namespace ConfigurationManager.Tests
 {

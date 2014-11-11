@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class ConfigurationGroup : DynamicObject, IConfigurationGroup

@@ -2,7 +2,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     public class PathDescriber : DynamicObject
     {

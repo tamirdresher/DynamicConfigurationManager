@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ConfigurationManager.ConfigurationProperties
+namespace DynamicConfigurationManager.ConfigurationProperties
 {
     public class ListProperty<TListItem> : ConfigurationProperty<TListItem>
     {

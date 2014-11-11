@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConfigurationManager.ConfigurationProperties;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager;
+using DynamicConfigurationManager.ConfigurationProperties;
+using DynamicConfigurationManager.Interfaces;
 using FakeItEasy;
 using NUnit.Framework;
 
@@ -34,7 +35,7 @@ namespace ConfigurationManager.Tests
         public void OpenConfiguration_ReadStringPropWithIndexers_ReturnsPropDefaultValue()
         {
            
-            var configurationManager = new ConfigurationManager(new []{new ThreeLevelsDeepConfigNodeWithStringProp()});
+            var configurationManager = new DynamicConfigurationManager.ConfigurationManager(new []{new ThreeLevelsDeepConfigNodeWithStringProp()});
             configurationManager.OpenConfiguration(new Version(1, 0),""/*empty json input*/);
 
             Assert.AreEqual(ThreeLevelsDeepConfigNodeWithStringProp.StringPropDefaultValue, configurationManager["Level1"]["Level2"]["Level3"]["ThreeLevelsDeepConfigNodeWithStringProp"]["StringProp"]);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConfigurationManager.ConfigurationProperties
+namespace DynamicConfigurationManager.ConfigurationProperties
 {
     public class NumericProperty<TNumeric> : ConfigurationProperty<TNumeric> where TNumeric : struct,IComparable
     {

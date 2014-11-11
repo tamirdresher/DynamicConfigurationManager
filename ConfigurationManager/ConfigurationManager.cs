@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager.Interfaces;
+using DynamicConfigurationManager.Json;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace ConfigurationManager
+namespace DynamicConfigurationManager
 {
     public class ConfigurationManager : DynamicObject, IConfigurationManager
     {

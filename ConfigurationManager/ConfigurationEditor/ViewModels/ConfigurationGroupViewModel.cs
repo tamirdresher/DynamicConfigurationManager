@@ -4,8 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using Caliburn.Micro;
 using ConfigurationEditor.ViewModels.Properties;
-using ConfigurationManager;
-using ConfigurationManager.Interfaces;
+using DynamicConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels
 {
