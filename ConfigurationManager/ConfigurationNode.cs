@@ -50,23 +50,29 @@ namespace DynamicConfigurationManager
         }
 
         [JsonIgnore]
-        public object this[string propName]
+        public virtual dynamic this[string configElementName]
         {
             get
             {
-                var prop = Properties.SingleOrDefault(p => p.Name == propName);
-                if (prop == null)
+                var prop = Properties.SingleOrDefault(p => p.Name == configElementName);
+                if (prop != null)
                 {
-                    throw new ArgumentException(string.Format("property with the name:'{0}' doesnt exist", propName));
+                    return prop.GetValue();
                 }
-                return prop.GetValue();
+
+                var configElement = base[configElementName];
+                if (configElement == null)
+                {
+                    throw new ArgumentException(string.Format("property or branch with the name:'{0}' doesnt exist under {1}", configElementName, Name));
+                }
+                return configElement;
             }
             set
             {
-                var prop = Properties.SingleOrDefault(p => p.Name == propName);
+                var prop = Properties.SingleOrDefault(p => p.Name == configElementName);
                 if (prop == null)
                 {
-                    throw new ArgumentException(string.Format("property with the name:'{0}' doesnt exist", propName));
+                    throw new ArgumentException(string.Format("property with the name:'{0}' doesnt exist", configElementName));
                 }
                 prop.SetValue(value);
             }
@@ -116,7 +122,7 @@ namespace DynamicConfigurationManager
         {
             var pathDescriber = new PathDescriber();
             DescribePath(pathDescriber);
-            var pathParts = pathDescriber.Path.Split(new []{'.'},StringSplitOptions.RemoveEmptyEntries);
+            var pathParts = pathDescriber.Path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             IList<IConfigurationElement> elements = configurationManager.AppConfiguration.ConfigurationElements;
             foreach (var pathPart in pathParts)
             {
@@ -138,7 +144,7 @@ namespace DynamicConfigurationManager
                 configurationGroup = this;
                 elements.Add(this);
             }
-            else if(!(configurationGroup is ConfigurationNode))//could be that some other config node was scanned first, so a config group was created instead of our config node
+            else if (!(configurationGroup is ConfigurationNode))//could be that some other config node was scanned first, so a config group was created instead of our config node
             {
                 this.ConfigurationElements.AddRange(configurationGroup.ConfigurationElements);
                 elements.Remove(configurationGroup);
@@ -160,20 +166,14 @@ namespace DynamicConfigurationManager
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            if (!base.TryGetMember(binder, out result))
+            if (this.Properties.Any(p => p.Name == binder.Name))
             {
-                if (this.Properties.Any(p=>p.Name==binder.Name))
-                {
-                    result = this[binder.Name];
-                }
-                else
-                {
-                    return false;
-                    
-                }
+                result = this[binder.Name];
+                return true;
             }
-            return true;
+            return base.TryGetMember(binder, out result);
+
         }
-        
+
     }
 }

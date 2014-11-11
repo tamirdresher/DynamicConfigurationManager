@@ -11,9 +11,10 @@ namespace DynamicConfigurationManager
     {
         private List<IConfigurationElement> _configurationElements;
 
-        public ConfigurationGroup():this("")
+        public ConfigurationGroup()
+            : this("")
         {
-            
+
         }
         public ConfigurationGroup(string name)
         {
@@ -27,18 +28,24 @@ namespace DynamicConfigurationManager
         [JsonProperty]
         public List<IConfigurationElement> ConfigurationElements
         {
-            get { return _configurationElements??(_configurationElements=new List<IConfigurationElement>()); }
+            get { return _configurationElements ?? (_configurationElements = new List<IConfigurationElement>()); }
             set { _configurationElements = value; }
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
+            if (base.TryGetMember(binder, out result))
+            {
+                return true;
+            }
+            
             var configGroup = GetConfigurationElement(binder.Name);
             if (configGroup != null)
             {
                 result = configGroup;
                 return true;
             }
+
             //else
             //{
             //    var configurationGroup = new ConfigurationGroup(binder.Name);
@@ -46,7 +53,7 @@ namespace DynamicConfigurationManager
             //    result = configurationGroup;
             //    return true;
             //}
-            throw new KeyNotFoundException(string.Format("Cant find configuration element with the name:{0} under ConfigurationGroup:{1}",binder.Name,Name));
+            throw new KeyNotFoundException(string.Format("Cant find configuration element with the name:{0} under ConfigurationGroup:{1}", binder.Name, Name));
 
 
         }
@@ -57,7 +64,7 @@ namespace DynamicConfigurationManager
             return ConfigurationElements.FirstOrDefault(c => c.Name == name);
         }
 
-        public dynamic this[string configElementName]
+        public virtual dynamic this[string configElementName]
         {
             get { return GetConfigurationElement(configElementName); }
         }

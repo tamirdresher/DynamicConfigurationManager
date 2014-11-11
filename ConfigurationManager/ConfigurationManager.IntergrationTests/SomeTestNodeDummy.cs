@@ -37,7 +37,7 @@ namespace ConfigurationManager.IntergrationTests
 
         public override object DescribePath(dynamic pathDescriber)
         {
-            var x = pathDescriber.Level1.Level2.Level3.SomeTestNodeDummy;
+            var x = pathDescriber.Level1.Level2.Level3;
             return x;
         }
     }
