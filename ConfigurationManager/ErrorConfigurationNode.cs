@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using ConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
 namespace ConfigurationManager

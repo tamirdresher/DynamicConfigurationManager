@@ -55,6 +55,7 @@
     <Compile Include="ElementExistResult.cs" />
     <Compile Include="ErrorConfigurationNodeConverter.cs" />
     <Compile Include="ErrorConfigurationNode.cs" />
+    <Compile Include="Interfaces\IConfigurationGroup.cs" />
     <Compile Include="Interfaces\IConfigurationManager.cs" />
     <Compile Include="Interfaces\IConfigurationNode.cs" />
     <Compile Include="Json\IgnorableSerializerContractResolver.cs" />

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using ConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
 namespace ConfigurationManager
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class ConfigurationGroup : DynamicObject, IConfigurationElement
+    public class ConfigurationGroup : DynamicObject, IConfigurationGroup
     {
         private List<IConfigurationElement> _configurationElements;
 
@@ -22,7 +23,7 @@ namespace ConfigurationManager
         }
 
         [JsonProperty]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         [JsonProperty]
         public List<IConfigurationElement> ConfigurationElements

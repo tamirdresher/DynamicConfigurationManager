@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using ConfigurationManager;
 using ConfigurationManager.ConfigurationProperties;
+using ConfigurationManager.Interfaces;
 
 namespace SampleConfigLib
 {
-    public class AnotherConfiguration : ConfigurationNode
+    public class AConfigurationInAnotherConfiguration : ConfigurationNode
     {
-        public AnotherConfiguration()
-            : base("AnotherConfiguration")
+        public AConfigurationInAnotherConfiguration()
+            : base("A Configuration In Another Configuration")
         {
 
         }
@@ -33,6 +34,35 @@ namespace SampleConfigLib
             return pathDescriber.Level1.Level2.AnotherConfiguration;
         }
     }
+    public class AnotherConfiguration : ConfigurationNode
+    {
+        public AnotherConfiguration()
+            : base("AnotherConfiguration")
+        {
+           
+        }
+
+        public override IEnumerable<IConfigurationProperty> CreateProperties()
+        {
+            var listItems = Enumerable.Range(1, 10).Select(i => "Item " + i).ToArray();
+            return new List<IConfigurationProperty>
+            {
+                new StringProperty("SomeTextValue","SomeTextValue", "ImportantValue"),
+                new NumericProperty<double>("a double","a double", 15.2, 109.90, -1.5),
+                new NumericProperty<int>("a int","a int", 26 ,51, 20),
+                new EnumProperty<ConsoleColor>("ConsoleColors","ConsoleColors", ConsoleColor.Blue),
+                new ListProperty<string>("StringListProperty","StringListProperty", listItems,"Item 5")
+            };
+        }
+
+
+        public override object DescribePath(dynamic pathDescriber)
+        {
+            return pathDescriber.Level1.Level2;
+        }
+    }
+
+    
     public class AnotherConfiguration3 : ConfigurationNode
     {
         public AnotherConfiguration3()

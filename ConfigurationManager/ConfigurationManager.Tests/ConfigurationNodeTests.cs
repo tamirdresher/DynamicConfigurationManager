@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ConfigurationManager.ConfigurationProperties;
+using ConfigurationManager.Interfaces;
 using FakeItEasy;
 using FakeItEasy.Core;
 using NUnit.Framework;
@@ -89,6 +90,16 @@ namespace ConfigurationManager.Tests
             Assert.AreEqual(newVersion, configurationElement.Version);
             A.CallTo(() => oldConfigurationProperty.Update(newConfigurationProperty, oldConfigurationNode)).MustHaveHappened();
 
+        }
+
+        [Test]
+        public void Add_OneConfigurationGroup_OneConfigrationGroupAdded()
+        {
+            var configurationNode = ConfigurationNodeTestHelper.CreateConfigurationNodeFake("FirstNode");
+            configurationNode.ConfigurationElements.Add(
+                ConfigurationNodeTestHelper.CreateConfigurationNodeFake("SecondNode"));
+
+            Assert.AreEqual(1, configurationNode.ConfigurationElements.Count);
         }
     }
 

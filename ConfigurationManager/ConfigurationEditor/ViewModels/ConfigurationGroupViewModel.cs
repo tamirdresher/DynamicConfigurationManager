@@ -5,14 +5,15 @@ using System.Linq;
 using Caliburn.Micro;
 using ConfigurationEditor.ViewModels.Properties;
 using ConfigurationManager;
+using ConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels
 {
     public class ConfigurationGroupViewModel:ConfigurationElementViewModel
     {
-        public ConfigurationGroup ConfigGroup { get; set; }
+        public IConfigurationGroup ConfigGroup { get; set; }
 
-        public ConfigurationGroupViewModel(ConfigurationGroup configGroup)
+        public ConfigurationGroupViewModel(IConfigurationGroup configGroup)
         {
             ConfigGroup = configGroup;
             Children=new BindableCollection<ConfigurationElementViewModel>();

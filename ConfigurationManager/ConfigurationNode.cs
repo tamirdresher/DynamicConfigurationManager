@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using ConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
 namespace ConfigurationManager
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class ConfigurationNode : DynamicObject, IConfigurationNode
+    public abstract class ConfigurationNode : ConfigurationGroup, IConfigurationNode
     {
         private Version _version;
         private List<IConfigurationProperty> _properties;
@@ -18,8 +19,8 @@ namespace ConfigurationManager
         }
         public abstract IEnumerable<IConfigurationProperty> CreateProperties();
         public abstract object DescribePath(dynamic pathDescriber);
-        [JsonProperty]
-        public virtual string Name { get; set; }
+        //[JsonProperty]
+        //public virtual string Name { get; set; }
         [JsonProperty]
         public Version Version
         {
@@ -131,13 +132,20 @@ namespace ConfigurationManager
                     elements = configGroup.ConfigurationElements;
                 }
             }
-            var configNode = elements.FirstOrDefault(e => e.Name == this.Name) as ConfigurationNode;
-            if (configNode == null)
+            var configurationGroup = elements.FirstOrDefault(e => e.Name == this.Name) as ConfigurationGroup;
+            if (configurationGroup == null)
             {
-                configNode = this;
+                configurationGroup = this;
                 elements.Add(this);
             }
-            return configNode;
+            else if(!(configurationGroup is ConfigurationNode))//could be that some other config node was scanned first, so a config group was created instead of our config node
+            {
+                this.ConfigurationElements.AddRange(configurationGroup.ConfigurationElements);
+                elements.Remove(configurationGroup);
+                elements.Add(this);
+                configurationGroup = this;
+            }
+            return configurationGroup as ConfigurationNode;
         }
 
         public override bool TryInvoke(InvokeBinder binder, object[] args, out object result)

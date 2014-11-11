@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 
 namespace ConfigurationManager.ConfigurationProperties

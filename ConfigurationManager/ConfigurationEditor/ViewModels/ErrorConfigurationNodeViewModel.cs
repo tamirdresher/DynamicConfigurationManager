@@ -1,4 +1,5 @@
 using ConfigurationManager;
+using ConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels
 {

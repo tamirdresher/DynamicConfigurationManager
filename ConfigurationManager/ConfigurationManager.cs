@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using ConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

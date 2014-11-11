@@ -12,6 +12,7 @@ using Caliburn.Micro;
 using ConfigurationEditor.ViewModels.Properties;
 using ConfigurationManager;
 using ConfigurationManager.ConfigurationProperties;
+using ConfigurationManager.Interfaces;
 using Microsoft.Win32;
 using Ninject;
 using Ninject.Extensions.Conventions;
@@ -147,20 +148,24 @@ namespace ConfigurationEditor.ViewModels
                     else
                     {
                         nodeVm = new ConfigurationNodeViewModel(node);
-                        foreach (var propVm in nodeVm.Children)
+                        foreach (var propVm in nodeVm.Children.OfType<ConfigurationPropertyViewModel>())
                         {
                             AddPropVm(propVm.ConfigProp, propVm);
                         }
 
                     }
                     parent.AddChild(nodeVm);
+                    CreateVms(nodeVm, node.ConfigurationElements);
                 }
-                var grp = configurationElement as ConfigurationGroup;
-                if (grp != null)
+                else
                 {
-                    var configurationGroupViewModel = new ConfigurationGroupViewModel(grp);
-                    parent.AddChild(configurationGroupViewModel);
-                    CreateVms(configurationGroupViewModel, grp.ConfigurationElements);
+                    var grp = configurationElement as ConfigurationGroup;
+                    if (grp != null)
+                    {
+                        var configurationGroupViewModel = new ConfigurationGroupViewModel(grp);
+                        parent.AddChild(configurationGroupViewModel);
+                        CreateVms(configurationGroupViewModel, grp.ConfigurationElements);
+                    }
                 }
 
             }

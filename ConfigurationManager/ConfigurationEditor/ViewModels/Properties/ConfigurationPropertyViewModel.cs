@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using ConfigurationEditor.Validation;
 using ConfigurationManager;
+using ConfigurationManager.Interfaces;
 using FluentValidation;
 using FluentValidation.Results;
 

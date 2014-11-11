@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ConfigurationManager;
 using ConfigurationManager.ConfigurationProperties;
+using ConfigurationManager.Interfaces;
 
 namespace ConfigurationEditor.ViewModels.Properties
 {

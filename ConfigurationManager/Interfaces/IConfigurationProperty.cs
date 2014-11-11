@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using ConfigurationManager.ConfigurationProperties;
 
-namespace ConfigurationManager
+namespace ConfigurationManager.Interfaces
 {
     public interface IConfigurationProperty : IConfigurationElement
     {

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigurationManager.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ConfigurationManager;
 using ConfigurationManager.ConfigurationProperties;
+using ConfigurationManager.Interfaces;
 
 namespace SampleConfigLib
 {
