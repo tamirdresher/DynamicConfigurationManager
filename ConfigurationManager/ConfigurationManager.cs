@@ -35,9 +35,9 @@ namespace ConfigurationManager
                 json = File.ReadAllText(configFile);
             }
             if (!OpenConfiguration(version, json)) return false;
-            
+
             Save(configFile);
-            
+
             return true;
         }
 
@@ -50,8 +50,8 @@ namespace ConfigurationManager
                 TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple,
                 Binder = new LooseTypesBinder(),
                 ObjectCreationHandling = ObjectCreationHandling.Replace,
-                
-                Converters = new[] { new ErrorConfigurationNodeConverter()}
+
+                Converters = new[] { new ErrorConfigurationNodeConverter() }
             };
             AppConfiguration =
                 JsonConvert.DeserializeObject<AppConfiguration>(json,
@@ -100,6 +100,14 @@ namespace ConfigurationManager
             return false;
         }
 
+        public dynamic this[string configGroupName]
+        {
+            get
+            {
+                var configGroup = AppConfiguration.ConfigurationElements.FirstOrDefault(c => c.Name == configGroupName);
+                return configGroup;
+            }
+        }
         public dynamic AsDynamic()
         {
             return this;
@@ -109,8 +117,9 @@ namespace ConfigurationManager
         {
             ConfigurationNode configNode = new TConfigNode();
             var pathDescriber = AsDynamic();
-            return (TConfigNode)configNode.DescribePath(pathDescriber);
-           // configNode;
+            var pathToNode = configNode.DescribePath(pathDescriber)[configNode.Name];
+            return (TConfigNode)pathToNode;
+            // configNode;
         }
     }
 }

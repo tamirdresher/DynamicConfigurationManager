@@ -15,6 +15,7 @@ using ConfigurationManager.ConfigurationProperties;
 using Microsoft.Win32;
 using Ninject;
 using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Conventions.Syntax;
 
 namespace ConfigurationEditor.ViewModels
 {
@@ -49,7 +50,7 @@ namespace ConfigurationEditor.ViewModels
 
         public async void SaveConfig()
         {
-            if (!string.IsNullOrEmpty(_configFilePath) && 
+            if (!string.IsNullOrEmpty(_configFilePath) &&
                 ConfigurationRoot != null &&
                 ConfigurationRoot.IsValid)
             {
@@ -81,6 +82,7 @@ namespace ConfigurationEditor.ViewModels
                                 .InheritedFrom<ConfigurationNode>()
                                 .BindAllInterfaces()));
 
+                    var qll = standardKernel.GetAll<ConfigurationNode>();
                     var configurationNodes = standardKernel.GetAll<IConfigurationNode>();
                     if (!configurationNodes.Any())
                     {

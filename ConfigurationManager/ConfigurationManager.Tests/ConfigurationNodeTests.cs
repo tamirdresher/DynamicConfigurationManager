@@ -73,7 +73,7 @@ namespace ConfigurationManager.Tests
             A.CallTo(() => newConfigurationNode.DescribePath(A<object>._))
                 .Invokes(x =>
                 {
-                    var arg = x.Arguments.Get<dynamic>(0).SomeName;
+                    //var arg = "Level1"; //x.Arguments.Get<dynamic>(0).SomeName;
                 });
 
             var oldVersion = new Version(1, 0, 0, 0);

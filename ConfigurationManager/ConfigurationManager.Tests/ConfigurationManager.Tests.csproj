@@ -56,10 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationGroup_ReadingTests.cs" />
+    <Compile Include="ConfigurationManager_ReadingTests.cs" />
     <Compile Include="ConfigurationNodeTestHelper.cs" />
     <Compile Include="ConfigurationNodeTests.cs" />
     <Compile Include="ConfigurationProperties\ConfigurationPropertyTests.cs" />
     <Compile Include="ConfigurationManagerTests.cs" />
+    <Compile Include="PathDescriberTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

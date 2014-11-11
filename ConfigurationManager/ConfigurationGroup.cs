@@ -33,7 +33,7 @@ namespace ConfigurationManager
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            var configGroup = ConfigurationElements.FirstOrDefault(c => c.Name == binder.Name);
+            var configGroup = GetConfigurationElement(binder.Name);
             if (configGroup != null)
             {
                 result = configGroup;
@@ -49,6 +49,17 @@ namespace ConfigurationManager
             throw new KeyNotFoundException(string.Format("Cant find configuration element with the name:{0} under ConfigurationGroup:{1}",binder.Name,Name));
 
 
+        }
+
+        private IConfigurationElement GetConfigurationElement(string name)
+        {
+            GetMemberBinder binder;
+            return ConfigurationElements.FirstOrDefault(c => c.Name == name);
+        }
+
+        public dynamic this[string configElementName]
+        {
+            get { return GetConfigurationElement(configElementName); }
         }
     }
 }

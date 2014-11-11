@@ -115,9 +115,9 @@ namespace ConfigurationManager
         {
             var pathDescriber = new PathDescriber();
             DescribePath(pathDescriber);
-            var pathParts = pathDescriber.Path.Split('.');
+            var pathParts = pathDescriber.Path.Split(new []{'.'},StringSplitOptions.RemoveEmptyEntries);
             IList<IConfigurationElement> elements = configurationManager.AppConfiguration.ConfigurationElements;
-            foreach (var pathPart in pathParts.Take(pathParts.Length - 1))
+            foreach (var pathPart in pathParts)
             {
                 var configGroup = elements.FirstOrDefault(e => e.Name == pathPart) as ConfigurationGroup;
                 if (configGroup != null)
@@ -131,7 +131,7 @@ namespace ConfigurationManager
                     elements = configGroup.ConfigurationElements;
                 }
             }
-            var configNode = elements.FirstOrDefault(e => e.Name == pathParts.Last()) as ConfigurationNode;
+            var configNode = elements.FirstOrDefault(e => e.Name == this.Name) as ConfigurationNode;
             if (configNode == null)
             {
                 configNode = this;
