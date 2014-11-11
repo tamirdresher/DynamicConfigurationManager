@@ -1,4 +1,4 @@
-Welcome to DynamicConfigurationManager!	{#welcome}
+Welcome to DynamicConfigurationManager!	
 =====================
 
 [![Build status](https://ci.appveyor.com/api/projects/status/327ypy8w0vtdqhwe)](https://ci.appveyor.com/project/tamirdresher/dynamicconfigurationmanager)
@@ -79,41 +79,41 @@ public override object DescribePath(dynamic pathDescriber)
 ```
 the indexer operator enables to give name with spaces, which cannot be achieved with the dot operator.
 
-##Working with the ConfigurationManager
-When creating the ConfigurationManager you need to pass a collection of ConfigurationNodes.
+##Working with the  ~~ConfigurationManager~~ ConfigurationReader
+When creating the  ~~ConfigurationManager~~ you need to pass a collection of ConfigurationNodes.
 ```cs
-public ConfigurationManager(IEnumerable<IConfigurationNode> configurationNodes)
+public ConfigurationReader(IEnumerable<IConfigurationNode> configurationNodes)
 ```
-the ConfigurationManager will read each of them and by using the _DescribePath_ method will build the tree of configuration.
+the ConfigurationReader will read each of them and by using the _DescribePath_ method will build the tree of configuration.
 
-To start using the ConfigurationManager, you need to call the _OpenConfiguration_ method.
-you can open an existing configuration file by specifying the file path otherwise ConfigurationManager will create a file with a default name.
+To start using the ConfigurationReader, you need to call the _OpenConfiguration_ method.
+you can open an existing configuration file by specifying the file path otherwise ConfigurationReader will create a file with a default name.
 
-The configuration file has a version embedded into it which will be used by the ConfigurationManager and ConfigurationNode to validate it. 
+The configuration file has a version embedded into it which will be used by the ConfigurationReader and ConfigurationNode to validate it. 
 you can specify inside your nodes if a new version will override the value for a property.
 
 ##Reading from the configuration
-ConfigurationManager is code first so static typing is the prefered way:
+ConfigurationReader is code first so static typing is the prefered way:
 ```cs
-SomeTestNodeDummy dynSomeConfig = configurationManager.GetConfigNode<SomeTestNodeDummy>();
+SomeTestNodeDummy dynSomeConfig = configurationReader.GetConfigNode<SomeTestNodeDummy>();
 var resolution = dynSomeConfig.Resolution;
 ```
-the ConfigurationManager will use the path that is defined inside the Node to pull its data.
+the ConfigurationReader will use the path that is defined inside the Node to pull its data.
 
-if you prefer a more verbose way to get the node you can use the _dynamic_ capabilities of the ConfiguratonManager:
+if you prefer a more verbose way to get the node you can use the _dynamic_ capabilities of the ConfigurationReader:
 
 ```cs
-var theValue = configurationManager.AsDynamic().Level1..Level2.Level3.ASimpleNode.AStringProperty
+var theValue = configurationReader.AsDynamic().Level1..Level2.Level3.ASimpleNode.AStringProperty
 string stringValue = theValue.ToString();
 ```
 
 you can also use the indexer option if you prefer working with strings or in the case that some branch or property name contains spaces:
 ```cs
 //option 1
-var theValue = configurationManager.AsDynamic()["Level1"]["Level2"]["Level3"]["ASimpleNode"]["AStringProperty"];
+var theValue = configurationReader.AsDynamic()["Level1"]["Level2"]["Level3"]["ASimpleNode"]["AStringProperty"];
 
 //option 2
-var theValue = configurationManager["Level1"]["Level2"]["Level3"]["ASimpleNode"]["AStringProperty"];
+var theValue = configurationReader["Level1"]["Level2"]["Level3"]["ASimpleNode"]["AStringProperty"];
 
 string stringValue = theValue.ToString();
 ```
@@ -121,7 +121,7 @@ string stringValue = theValue.ToString();
 You can even use a combination of all the methods
 ```cs
 
-var theValue = configurationManager["Level1"].Level2["Level3"].ASimpleNode["AStringProperty"];
+var theValue = configurationReader["Level1"].Level2["Level3"].ASimpleNode["AStringProperty"];
 
 string stringValue = theValue.ToString();
 ```
